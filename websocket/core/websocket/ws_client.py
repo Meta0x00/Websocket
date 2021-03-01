@@ -12,7 +12,7 @@ class WsClient(object):
     async def client_run(self):
         async with websockets.connect(f"ws://{self.host}:{self.port}") as ws:
             while True:
-                msg = input("Input: ")
+                msg = await asyncio.get_event_loop().run_in_executor(None, lambda: input("Input: "))
                 print(f"> Send {msg}")
                 await ws.send(msg)
                 recv = await ws.recv()
@@ -21,7 +21,7 @@ class WsClient(object):
     async def client_run_ex(self):
         ws = create_connection(f"ws://{self.host}:{self.port}")
         while True:
-            msg = input("Input: ")
+            msg = await asyncio.get_event_loop().run_in_executor(None, lambda: input("Input: "))
             ws.send(msg)
             print(f"> Send {msg}")
             recv = ws.recv()
