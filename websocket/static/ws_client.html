@@ -9,7 +9,7 @@
         function WebSocketTest() {
             if ("WebSocket" in window) {
                 // 打开一个 web socket
-                var ws = new WebSocket("ws://127.0.0.1:7001");
+                var ws = new WebSocket("wss://charui-robot.app.mypscloud.com:7001/wss/");
                 // 连接建立后的回调函数
                 ws.onopen = function () {
                     // Web Socket 已连接上，使用 send() 方法发送数据
