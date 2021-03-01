@@ -9,6 +9,7 @@ class WsServer(object):
         self.host = websocket_conf.host
 
     async def server(self, websocket, path):
+        print(websocket)
         while True:
             msg = await websocket.recv()
             print(f"> From client {msg}")
