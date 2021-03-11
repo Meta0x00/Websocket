@@ -9,13 +9,12 @@ DEFAULT_LOG_FMT = "%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s: %(m
 # 默认时间格式
 DEFUALT_LOG_DATEFMT = "%Y-%m-%d %H:%M:%S"
 # 输出日志路径
-# LOG_OUT_PATH = os.path.abspath(".") + "/logs/logs/"
-LOG_OUT_PATH = "/opt/odoo/platform/ps_websocket/websocket/logs/logs/"
+LOG_OUT_PATH = "/".join(os.path.dirname(__file__).split("/")[:-1]) + "/logs/"
 
 
 class Logger(object):
-    def __init__(self):
-        self._logger = logging.getLogger()
+    def __init__(self, name=__name__):
+        self._logger = logging.getLogger(name)
         self.DEFAULT_LOG_FILENAME = "{0}{1}.log".format(LOG_OUT_PATH, strftime("%Y-%m-%d"))
         self.formatter = logging.Formatter(fmt=DEFAULT_LOG_FMT, datefmt=DEFUALT_LOG_DATEFMT)
         self._logger.addHandler(self._get_file_handler(self.DEFAULT_LOG_FILENAME))
